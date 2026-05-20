@@ -5,22 +5,19 @@ import statsmodels.api as smf
 import altair as alt
 
 
-import requests
-from bs4 import BeautifulSoup
-import json
-from urllib.parse import urljoin
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import StratifiedKFold
-from sklearn.model_selection import cross_val_score
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-
-from sklearn.metrics import r2_score, mean_absolute_error, accuracy_score, mean_squared_error
-from sklearn import metrics
-from sklearn.cluster import KMeans
-from sklearn import preprocessing
+# from urllib.parse import urljoin
+# from sklearn.neighbors import KNeighborsClassifier
+# from sklearn.neighbors import KNeighborsRegressor
+# from sklearn.preprocessing import StandardScaler
+# from sklearn.model_selection import StratifiedKFold
+# from sklearn.model_selection import cross_val_score
+# from sklearn.model_selection import train_test_split
+# from sklearn.linear_model import LinearRegression
+#
+# from sklearn.metrics import r2_score, mean_absolute_error, accuracy_score, mean_squared_error
+# from sklearn import metrics
+# from sklearn.cluster import KMeans
+# from sklearn import preprocessing
 
 # set up pages
 
