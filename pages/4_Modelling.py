@@ -1,14 +1,7 @@
 from html.parser import charref
-
 import streamlit as st
-import matplotlib
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 import statsmodels.api as smf
-import seaborn as sns
-from pylab import rcParams
-# import plotly.express as px
 import altair as alt
 
 
