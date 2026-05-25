@@ -25,8 +25,8 @@ st.title("Solar Scenario Predictions")
 
 
 
-solar_multiplier = st.slider("Solar Muliplier", 0.1, 20.0, 2.0, step=0.05)
-net_demand_multiplier = st.slider("Net Demand Multiplier", 0.1, 20.0, 2.0, step=0.05)
+solar_multiplier = st.slider("Solar Muliplier", 0.1, 10.0, 1.0, step=0.05)
+net_demand_multiplier = st.slider("Net Demand Multiplier", 0.1, 10.0, 1.0, step=0.05)
 
 gdp = pd.read_csv("Datafiles/pricedemand.csv")
 
