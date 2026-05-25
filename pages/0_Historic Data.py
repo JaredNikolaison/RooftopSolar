@@ -116,7 +116,7 @@ with demand_tab.container():
         as_=['Total', 'Net']
         ).mark_line().encode(
             x = alt.X('date:T', axis=alt.Axis(format='%Y', title='Date', tickCount="year")),
-            y=alt.Y('Net:Q', axis=alt.Axis(title='Price ($/GWh)')).scale(zero=False),
+            y=alt.Y('Net:Q', axis=alt.Axis(title='Demand (GWh)')).scale(zero=False),
             color=alt.Color('Total:N', legend=alt.Legend(title="Legend")).scale(
                   domain=['Total Demand', 'Net Grid Demand'],
                   range=['Blue', 'Orange']

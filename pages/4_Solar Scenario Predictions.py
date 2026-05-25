@@ -1,28 +1,15 @@
-from html.parser import charref
+# from html.parser import charref
 import streamlit as st
 import pandas as pd
 import statsmodels.api as smf
 import altair as alt
-from streamlit import title
+import numpy as np
 
-# from urllib.parse import urljoin
-# from sklearn.neighbors import KNeighborsClassifier
-# from sklearn.neighbors import KNeighborsRegressor
-# from sklearn.preprocessing import StandardScaler
-# from sklearn.model_selection import StratifiedKFold
-# from sklearn.model_selection import cross_val_score
-# from sklearn.model_selection import train_test_split
-# from sklearn.linear_model import LinearRegression
-#
-# from sklearn.metrics import r2_score, mean_absolute_error, accuracy_score, mean_squared_error
-# from sklearn import metrics
-# from sklearn.cluster import KMeans
-# from sklearn import preprocessing
 
 # set up pages
 
 st.set_page_config(
-    page_title="Modelling",
+    page_title="Solar Scenario Predictions",
     layout="wide",
 
 
@@ -201,17 +188,46 @@ with price_impact.container():
     # st.write(summary)
 
     impact_chart = alt.Chart(summary).mark_bar().encode(
-        alt.X('Data', title=""),
-        alt.Y('Value', axis=alt.Axis(grid=False)),
-       color =  alt.Color('Scenario',).scale(
+        alt.X('Data:N', title="", axis=alt.Axis(labelAngle=0)),
+        alt.Y('Value:Q', axis=alt.Axis(grid=False)),
+        xOffset='Scenario:N',
+
+        color =  alt.Color('Scenario',).scale(
                   domain=['Base Price', 'Predicted Price'],
                   range=['blue', 'orange'])).properties(title="Price Impact of Predicted Scenario vs Base Values"
 )
 
     st.altair_chart(impact_chart, use_container_width=True)
 
-    st.write("This shows the price impact under the base and predicted scenarios")
 
+# 1. Generate some mock multi-line data
+np.random.seed(42)
+days = pd.date_range("2026-01-01", periods=30)
+df = pd.DataFrame(
+    {
+        "Date": np.repeat(days, 3),
+        "Stock": np.tile(["AAPL", "GOOG", "MSFT"], 30),
+        "Price": np.random.randint(100, 200, size=90).cumsum(),
+    }
+)
 
+st.title("Custom Altair Snapping Tooltip")
+
+# 2. Define the selection parameter
+# 'nearest=True' and 'fields=["Date"]' forces it to snap to the closest X-axis value
+nearest = alt.selection_point(
+    nearest=True, on="mouseover", fields=["Date"], empty=False
+)
+
+# 3. Create the base line chart
+base = (
+    alt.Chart(df)
+    .encode(
+        x=alt.X("Date:T", title="Date"),
+        y=alt.Y("Price:Q", title="Price ($)"),
+        color="Stock:N",
+    )
+    .properties(width="container", height=400)
+)
 
 
