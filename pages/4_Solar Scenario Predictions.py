@@ -199,35 +199,3 @@ with price_impact.container():
 
     st.altair_chart(impact_chart, use_container_width=True)
 
-
-# 1. Generate some mock multi-line data
-np.random.seed(42)
-days = pd.date_range("2026-01-01", periods=30)
-df = pd.DataFrame(
-    {
-        "Date": np.repeat(days, 3),
-        "Stock": np.tile(["AAPL", "GOOG", "MSFT"], 30),
-        "Price": np.random.randint(100, 200, size=90).cumsum(),
-    }
-)
-
-st.title("Custom Altair Snapping Tooltip")
-
-# 2. Define the selection parameter
-# 'nearest=True' and 'fields=["Date"]' forces it to snap to the closest X-axis value
-nearest = alt.selection_point(
-    nearest=True, on="mouseover", fields=["Date"], empty=False
-)
-
-# 3. Create the base line chart
-base = (
-    alt.Chart(df)
-    .encode(
-        x=alt.X("Date:T", title="Date"),
-        y=alt.Y("Price:Q", title="Price ($)"),
-        color="Stock:N",
-    )
-    .properties(width="container", height=400)
-)
-
-
