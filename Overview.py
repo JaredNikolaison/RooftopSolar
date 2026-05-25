@@ -28,6 +28,9 @@ Understanding how increasing rooftop solar generation affects supply–demand dy
 """)
 
 
+st.image("Datafiles/SolarPanel2.png", caption="Image Designed by Magnific", width="stretch", use_column_width=None, clamp=False, link ="https://www.magnific.com/free-psd/clean-energy-solar-panel-array-powering-sustainable-future_407748312.htm#fromView=keyword&page=1&position=1&uuid=c005b1cf-5574-4194-aaec-f0b29670ddf5&query=Solar+panel" )
+
+
 
 #
 # uploaded_file = st.file_uploader("Choose a file",
