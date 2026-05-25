@@ -15,28 +15,25 @@ st.set_page_config(
 )
 
 
-# st.write("""s
-# # My first app
-# Hello *world!*
-# """)
-# df = pd.read_excel("wine_data.xls")
-#
-# st.line_chart(df)
-
 
 st.title("Historic Data")
 
 
-
+# read in  data
 solarcapacity_df  = pd.read_csv("Datafiles/solarcapacity.csv")
 demand_df = pd.read_csv("Datafiles/Demand_Clean.csv")
 pricing_df  = pd.read_csv("Datafiles/Wholesale_Pricing.csv")
 
 
+# create tabs
+
 capacity_tab, generation_tab, demand_tab, pricing_tab = st.tabs(["Solar Capacity", "Solar Generation", "Demand and Load", "Pricing"])
 
 
 with capacity_tab.container():
+
+    # old graph style
+
     # st.subheader("Solar Capacity Over Time")
     # st.line_chart(
     #     solarcapacity_df,
@@ -48,6 +45,7 @@ with capacity_tab.container():
     #
     # )
 
+    # draw capacity graph
 
     capacity_graph = alt.Chart(solarcapacity_df).mark_line(color = 'blue').encode(
         x=alt.X('date:T', axis=alt.Axis(format='%Y', title='Date', tickCount="year"),
@@ -67,6 +65,11 @@ with capacity_tab.container():
              )
 
 with generation_tab.container():
+
+
+
+    # old graph style
+
     # st.subheader("Solar Generation Over Time")
     #
     # st.line_chart(
@@ -80,6 +83,7 @@ with generation_tab.container():
     #
     # )
 
+    # draw generation graph
 
     generation_graph = alt.Chart(solarcapacity_df).mark_line(color = 'Red').encode(
         x=alt.X('date:T', axis=alt.Axis(format='%Y', title='Date', tickCount="year"),
@@ -99,6 +103,9 @@ with generation_tab.container():
 
 
 with demand_tab.container():
+
+    # old graph style
+
     # st.subheader("Demand Over Time")
     # st.line_chart(
     #     demand_df,
@@ -110,6 +117,8 @@ with demand_tab.container():
     # )
 
     demand_df.rename(columns={'demand_gwh': 'Total Demand', 'net_grid_demand_gwh':'Net Grid Demand'}, inplace=True)
+
+    # draw demand graph
 
     demand_chart = alt.Chart(demand_df).transform_fold(
         fold=['Total Demand', 'Net Grid Demand'],
@@ -145,6 +154,8 @@ with pricing_tab.container():
     #     y_label="Price ($/GWh)",
     #     x_label="Month",
     # )
+
+    # draw pricing graph
 
     pricing_graph = alt.Chart(pricing_df).mark_line(color = 'Green').encode(
         x=alt.X('date:T', axis=alt.Axis(format='%Y', title='Date', tickCount="year"),

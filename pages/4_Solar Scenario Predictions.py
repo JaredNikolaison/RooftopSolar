@@ -23,14 +23,18 @@ st.title("Solar Scenario Predictions")
 
 
 
-
+# create multiplier slidders
 
 solar_multiplier = st.slider("Solar Generation Muliplier", 0.1, 10.0, 1.0, step=0.05)
 net_demand_multiplier = st.slider("Net Demand Multiplier", 0.1, 10.0, 1.0, step=0.05)
 
+# read in dataframes
 gdp = pd.read_csv("Datafiles/pricedemand.csv")
 
 model_solar_quad = smf.iolib.smpickle.load_pickle("Datafiles/model_solar_quad.pkl")
+
+
+# calculate predictions
 
 
 def predictprice(net_demand_series, generation_series):
@@ -51,6 +55,8 @@ price, volatility, price_impact = st.tabs(["Wholesale Electricity Price Predicti
 
 with price.container():
 
+
+    # old graph
 
     # solar_demand  = pd.read_csv("Datafiles/demand_solar_clean.csv")
 
@@ -80,8 +86,7 @@ with price.container():
     gdp.rename(columns = {'smoothed_price':'Base Price'}, inplace = True)
 
 
-    # st.altair_chart(joined_chart, use_container_width=True)
-
+    # draw price chart
 
     price_chart = alt.Chart(gdp).transform_fold(
     fold=['Predicted Price', 'Base Price'],
@@ -107,6 +112,7 @@ with price.container():
 
 with volatility.container():
 
+    # old graph
 
     #
     # predicted_volatility_line = alt.Chart(gdp).mark_line(color = 'blue').encode(
@@ -141,6 +147,8 @@ with volatility.container():
     # st.altair_chart(joined_chart_volatility, use_container_width=True)
 
 
+    #draw volatility chart
+
     volatility_chart = alt.Chart(gdp).transform_fold(
         fold=['Predicted Volatility', 'Base Volatility'],
         as_=['predicted', 'base']
@@ -163,6 +171,8 @@ with volatility.container():
     st.write("This shows the base volatility compared against a predicted Volatility calculated by the multipliers above")
 
 with price_impact.container():
+
+    # draw price impact graph
 
     threshold = gdp['Base Price'].quantile(0.95)
     gdp['Price Spike'] = gdp['price_GWh'] > threshold
