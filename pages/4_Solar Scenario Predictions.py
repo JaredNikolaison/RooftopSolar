@@ -175,10 +175,10 @@ with price_impact.container():
     #               },
     #              index=["Average Price", "Volatility", "Spike Probability"])
 
-    summary = pd.DataFrame([[gdp["Base Price"].mean(),"Base Price", "Average"],
+    summary = pd.DataFrame([[gdp["Base Price"].mean(),"Base Price", "Average Price"],
                              [gdp["Base Price"].std(),"Base Price","Volatility"],
                              [gdp["Price Spike"].mean(),"Base Price","Spike Probability"],
-                             [gdp["Predicted Price"].mean(),"Predicted Price","Average"],
+                             [gdp["Predicted Price"].mean(),"Predicted Price","Average Price"],
                              [gdp["Predicted Price"].std(),"Predicted Price","Volatility"],
                              [gdp["Predicted Price Spike"].mean(),"Predicted Price","Spike Probability"]
                             ],
